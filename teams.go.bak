@@ -15,7 +15,7 @@ func (t *Teams) Profile(teamname string) (interface{}, error) {
 }
 
 func (t *Teams) Members(teamname string) (interface{}, error) {
-	urlStr := t.c.requestUrl("/workspaces/%s/members", teamname)
+	urlStr := t.c.requestUrl("/teams/%s/members", teamname)
 	return t.c.execute("GET", urlStr, "")
 }
 
