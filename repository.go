@@ -472,17 +472,6 @@ func (r *Repository) BranchingModel(rbmo *RepositoryBranchingModelOptions) (*Bra
 	return decodeBranchingModel(response)
 }
 
-func (r *Repository) buildJsonBody(body map[string]interface{}) string {
-
-	data, err := json.Marshal(body)
-	if err != nil {
-		pp.Println(err)
-		os.Exit(9)
-	}
-
-	return string(data)
-}
-
 func (r *Repository) ListEnvironments(opt *RepositoryEnvironmentsOptions) (*Environments, error) {
 	urlStr := r.c.requestUrl("/repositories/%s/%s/environments/", opt.Owner, opt.RepoSlug)
 	res, err := r.c.executeRaw("GET", urlStr, "")
