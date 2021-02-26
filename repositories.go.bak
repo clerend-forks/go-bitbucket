@@ -41,18 +41,6 @@ func (r *Repositories) ListForAccount(ro *RepositoriesOptions) (*RepositoriesRes
 	return decodeRepositorys(repos)
 }
 
-func (r *Repositories) Test(ro *RepositoriesOptions) (bool, error) {
-	urlStr := r.c.requestUrl("/repositories/%s", ro.Owner)
-	if ro.Role != "" {
-		urlStr += "?role=" + ro.Role
-	}
-	_, err := r.c.executeRaw("GET", urlStr, "")
-	if err != nil {
-		return false, err
-	}
-	return true, nil
-}
-
 func (r *Repositories) ListForTeam(ro *RepositoriesOptions) (*RepositoriesRes, error) {
 	urlStr := r.c.requestUrl("/repositories/%s", ro.Owner)
 	if ro.Role != "" {

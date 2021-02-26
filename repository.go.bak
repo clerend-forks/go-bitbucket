@@ -38,10 +38,6 @@ type Repository struct {
 	Owner       map[string]interface{}
 	Links       map[string]interface{}
 	Parent      *Repository
-	Scm         string
-	IsPrivate   bool `mapstructure:"is_private"`
-	UUID        string
-	Updated     string `mapstructure:"updated_on"`
 }
 
 type RepositoryFile struct {
@@ -470,17 +466,6 @@ func (r *Repository) BranchingModel(rbmo *RepositoryBranchingModelOptions) (*Bra
 		return nil, err
 	}
 	return decodeBranchingModel(response)
-}
-
-func (r *Repository) buildJsonBody(body map[string]interface{}) string {
-
-	data, err := json.Marshal(body)
-	if err != nil {
-		pp.Println(err)
-		os.Exit(9)
-	}
-
-	return string(data)
 }
 
 func (r *Repository) ListEnvironments(opt *RepositoryEnvironmentsOptions) (*Environments, error) {
